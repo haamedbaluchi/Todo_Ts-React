@@ -1,13 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>todo-app-ts</title>
+    <title>Task Manager | TypeScript MVC</title>
+    <!-- Adding Tailwind via CDN for rapid development -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div id="app"></div>
+  <body class="min-h-screen bg-slate-100 flex items-center justify-center p-4 font-sans text-slate-800">
+
+    <!-- Layer 2: App Container -->
+    <main class="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col gap-6">
+      
+      <!-- Header -->
+      <header class="border-b pb-4">
+        <h1 class="text-3xl font-bold text-slate-900">My Tasks</h1>
+        <!-- <p class="text-sm text-slate-500 mt-1">Built with Vanilla TS and Layered Architecture (MVC)</p> -->
+      </header>
+
+      <!-- Form Section (Create Task) -->
+      <section class="flex flex-col sm:flex-row gap-3">
+        <input 
+          type="text" 
+          id="todo-input" 
+          placeholder="What needs to be done?..." 
+          class="flex-1 border border-slate-300 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+        />
+        <button 
+          id="add-btn" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors whitespace-nowrap shadow-sm"
+        >
+          Add Task
+        </button>
+      </section>
+
+      <!-- Layer 3: Todo List Area (Dynamic Render Location) -->
+      <section>
+        <!-- 
+          The ID 'todo-list' acts as a contract between the HTML and the TypeScript UI layer.
+          'max-h' and 'overflow-y-auto' prevent the page from stretching indefinitely.
+        -->
+        <ul id="todo-list" class="flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-2">
+          <!-- 'li' elements will be dynamically generated and appended here by todo.ui.ts -->
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- Connection to the TypeScript entry point -->
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
